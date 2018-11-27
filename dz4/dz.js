@@ -69,11 +69,22 @@ let appData = {
     }
   },
   chooseIncome: function() {
-    let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
+//    let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
+    let items;
+    while (items == '' || items == null) {
+      items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
+    }
     appData.income = items.split(', ');
     appData.income.push(prompt('Может что то еще?'));
     appData.income.sort();
+
+    appData.income.forEach(function(data, index, income) {
+      console.log('Способы дополнительного заработка: ' + (index + 1) + ' - ' + data);
+    });
   }
 };
 
+for(var objectData in appData) {
+  console.log('Наша программа включает в себя данные: ' + objectData);
+}
 console.log(appData);
