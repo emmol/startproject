@@ -63,28 +63,32 @@ let appData = {
   },
   // метод определения не обязательных расходов
   chooseOptExpenses: function() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i <= 3; i++) {
       let c = prompt("Статья необязательных расходов?");
       appData.optionalExpenses[i] = c;
+      console.log(appData.optionalExpenses);
     }
   },
+  // метод получения дополнительного дохода
   chooseIncome: function() {
-//    let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
-    let items;
-    while (items == '' || items == null) {
-      items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
-    }
-    appData.income = items.split(', ');
-    appData.income.push(prompt('Может что то еще?'));
-    appData.income.sort();
 
-    appData.income.forEach(function(data, index, income) {
+    let items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
+
+    if (typeof(items) != "string" || items == '' || items == null) {
+      items = prompt("Что принесет дополнительный доход? (Перечислите через запятую)", '');
+      console.log("Вы ввели некорректные данные или не ввели их вовсе");
+    } else {
+      appData.income = items.split(', ');
+      appData.income.push(prompt('Может что то еще?'));
+      appData.income.sort();
+    }
+
+    appData.income.forEach(function(data, index) {
       console.log('Способы дополнительного заработка: ' + (index + 1) + ' - ' + data);
     });
   }
 };
 
-for(var objectData in appData) {
-  console.log('Наша программа включает в себя данные: ' + objectData);
+for(let key in appData) {
+  console.log('Наша программа включает в себя данные: ' + key + ' - ' + appData[key]);
 }
-console.log(appData);
