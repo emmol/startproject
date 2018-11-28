@@ -1,21 +1,17 @@
 // восстанавливаю порядок в меню, добавляю пятый пункт
-let my = document.querySelector('.menu');
-let allItems = my.querySelectorAll('.menu-item');
+let menu = document.getElementsByClassName('menu')[0],
+    menuItem = document.getElementsByClassName('menu-item');
 
-
-allItems[2].textContent = 'Третий пункт';
-allItems[1].textContent = 'Второй пункт';
+menu.insertBefore(menuItem[2], menuItem[1]);
 
 let liElement = document.createElement('li');
-
-my.appendChild(liElement);
 liElement.classList.add('menu-item');
 liElement.textContent = 'Пятый пункт';
+menu.appendChild(liElement);
 
 // меняю картинку заднего фона
 
-let picture = document.querySelector('body');
-picture.style.background = 'url(img/apple_true.jpg)';
+document.body.style.backgroundImage = 'url(img/apple_true.jpg)';
 
 // изменяем заголовок
 
@@ -24,15 +20,14 @@ newTitle.textContent = 'Мы продаем только подлинную те
 
 // удаляем рекламу на странице
 
-let add = document.getElementsByClassName('column')[1];
-let adv = add.getElementsByClassName('adv');
-add.removeChild(adv[0]);
+let adv = document.getElementsByClassName('adv')[0];
+adv.remove();
 
 // вопросы пользователя
 
-let pro = document.getElementById('prompt');
+let promptFromApple = document.querySelector('#prompt');
 let question = prompt('Как вы относитесь к технике Apple? ', '');
-pro.innerHTML = question;
+promptFromApple.textContent = question;
 
 
 
