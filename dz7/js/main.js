@@ -21,7 +21,7 @@ let startBtn = document.getElementById("start"),
     monthValue = document.querySelector('.month-value'),
     dayValue = document.querySelector('.day-value');
 
-let money, time, total;
+let money, time;
 
 // отключаем кнопки
 
@@ -34,11 +34,7 @@ let money, time, total;
 startBtn.addEventListener('click', function() {
   time = prompt("Введите дату в формате YYYY-MM-DD", "");
   money = +prompt("Ваш бюджет на месяц?", "");
-  // включаем кнопки
-  expensesBtn.disabled = false;
-  optionalExpensesBtn.disabled = false;
-  countBtn.disabled = false;
-
+  
   while (isNaN(money) || money == "" || money == null) {
     money = +prompt("Ваш бюджет на месяц?", '');
   }
@@ -48,6 +44,11 @@ startBtn.addEventListener('click', function() {
   yearValue.value = new Date(Date.parse(time)).getFullYear();
   monthValue.value = new Date(Date.parse(time)).getMonth() + 1;
   dayValue.value = new Date(Date.parse(time)).getDate();
+
+   // включаем кнопки
+   expensesBtn.disabled = false;
+   optionalExpensesBtn.disabled = false;
+   countBtn.disabled = false;
 });
 
 expensesBtn.addEventListener('click', function() {
@@ -67,7 +68,6 @@ expensesBtn.addEventListener('click', function() {
     }
   }
   expensesValue.textContent = sum;
-  total = sum;
 });
 
 // метод определения не обязательных расходов
@@ -82,7 +82,7 @@ optionalExpensesBtn.addEventListener('click', function() {
  // метод проверки уровня достатка
 countBtn.addEventListener('click', function() {
   if (appData.budget != undefined) {
-    appData.moneyPerDay = ((appData.budget - total )/ 30).toFixed(); // формула расчета дневного бюджета
+    appData.moneyPerDay = ((appData.budget - +expensesValue.textContent)/ 30).toFixed(); // формула расчета дневного бюджета
     dayBudgetValue.textContent = appData.moneyPerDay; 
 
     if(appData.moneyPerDay < 100) {
